@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+
+* {
+	margin: 0;
+}
+
+html, body {
+	font: 1em;
+	font-family: Arial, Helvetica, sans-serif;
+	height: 100%;
+}
+
+#header {
+	background: black;
+	/* width: 100%; */
+	min-height: 100%;
+}
+
+#content {
+	width: 800px;
+	background-color: white;
+	border-radius: 3px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	padding: 3px;
+	padding-bottom: 12px;
+}
+
+#footer {
+	background-color: black;
+	width: 100%;
+	font-size: 0.7em;
+	color: white;
+	height: 12px;
+	margin-top: -12px;
+}
+
+#languages {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.submit {
+	width: auto;
+	padding: 0.3em 1.2em;
+	background: black;
+	border: 0;
+	font-size: 1em;
+	color: white;
+	border-radius: 5px;
+}
+
+.infoMsg {
+	color: green;
+}
+
+.erroMsg {
+	color: red;
+	padding-left: 0.5em;
+}

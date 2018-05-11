@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<ui:composition template="/templates/_template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+		<h:outputText value="#{msg['Index.titulo']}" />
+	</ui:define>
+
+	<ui:define name="content">
+		<div>
+			<h1>#{msg['Solicitacao.titulo']}</h1>
+			<h:form id="formSolicitacao">
+				<h:messages id="msgErro" styleClass="erroMsg" />
+
+				<h:panelGrid columns="2" cellpadding="2">
+
+					<p:outputLabel value="#{msg['Solicitacao.cidade']}"
+						for="textCidade" />
+					<h:panelGroup layout="block">
+						<p:inputText id="textCidade" size="30" alt="Cidade"
+							value="#{solicitacaoBean.solicitacao.cidade}" 
+							autocomplete="off"
+							required="true"
+							requiredMessage="#{msg['Solicitacao.cidadeRequerida']}" />
+						<p:message for="textCidade" styleClass="erroMsg" />
+					</h:panelGroup>
+
+					<p:outputLabel value="#{msg['Solicitacao.tipo']}" for="selectTipo" />
+					<p:selectOneMenu id="selectTipo" value="#{solicitacaoBean.solicitacao.tipo}"
+						required="true"
+						requiredMessage="#{msg['Solicitacao.tipoRequerido']}">
+						<f:selectItem itemValue="" itemLabel="#{msg['Solicitacao.tipoSelecione']}" />
+						<f:selectItems value="#{solicitacaoBean.tipos}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg['Solicitacao.operacao']}"
+						for="oneRadioOp" />
+					<p:selectOneRadio id="oneRadioOp"
+						value="#{solicitacaoBean.solicitacao.operacao}" required="true"
+						requiredMessage="#{msg['Solicitacao.operacaoRequerida']}">
+						<f:selectItem itemLabel="#{msg['Solicitacao.operacao.aluguel']}" itemValue="Aluguel" />
+						<f:selectItem itemLabel="#{msg['Solicitacao.operacao.compra']}" itemValue="Compra" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="#{msg['Solicitacao.finalidade']}"
+						for="oneListboxFinalidade" />
+					<p:selectOneListbox id="oneListboxFinalidade"
+						value="#{solicitacaoBean.solicitacao.finalidade}" required="true"
+						requiredMessage="#{msg['Solicitacao.finalidadeRequerida']}">
+						<f:selectItem itemLabel="#{msg['Solicitacao.finalidade.comercial']}" itemValue="Comercial" />
+						<f:selectItem itemLabel="#{msg['Solicitacao.finalidade.residencial']}" itemValue="Residencial" />
+					</p:selectOneListbox>
+
+					<p:outputLabel value="#{msg['Solicitacao.valor']}" for="textValor" />
+					<p:inputText id="textValor" size="30"
+						value="#{solicitacaoBean.solicitacao.valor}" 
+						validatorMessage="#{msg['Solicitacao.valorInvalido']}"	/>
+
+					<p:outputLabel for="textareaDesc" value="#{msg['Solicitacao.descricao']}" />
+					<p:inputTextarea id="textareaDesc" rows="5" cols="40"
+						value="#{solicitacaoBean.solicitacao.descricao}" />
+
+					<p:outputLabel value="#{msg['Solicitacao.novo']}" for="checkboxNovo" />
+					<p:selectBooleanCheckbox id="checkboxNovo"
+						value="#{solicitacaoBean.solicitacao.novo}" />
+
+					<p:outputLabel value="#{msg['Solicitacao.itens']}" for="manyCheckboxItens" />
+					<p:selectManyCheckbox id="manyCheckboxItens" value="#{solicitacaoBean.solicitacao.itens}">
+						<f:selectItem itemLabel="#{msg['Solicitacao.itens.piscina']}" itemValue="Piscina" />
+						<f:selectItem itemLabel="#{msg['Solicitacao.itens.hidromassagem']}" itemValue="Hidro" />
+						<f:selectItem itemLabel="#{msg['Solicitacao.itens.academia']}" itemValue="Academia" />
+						<f:selectItem itemLabel="#{msg['Solicitacao.itens.sauna']}" itemValue="Sauna" />
+					</p:selectManyCheckbox>
+
+					<p:outputLabel value="#{msg['Solicitacao.comodos']}" for="manyListboxComodos" />
+					<p:selectManyMenu id="manyListboxComodos"
+						value="#{solicitacaoBean.solicitacao.comodos}">
+						<f:selectItems value="#{solicitacaoBean.listaComodos}" />
+					</p:selectManyMenu>
+
+					<p:outputLabel for="textEmail" value="#{msg['Solicitacao.email']}" />
+					<p:inputText id="textEmail" 
+						size="30"
+						value="#{solicitacaoBean.solicitacao.email}" 
+						required="true"
+						requiredMessage="#{msg['Solicitacao.emailRequerido']}"
+						validatorMessage="#{msg['Solicitacao.emailInvalido']}" >
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$" />
+					</p:inputText>
+
+					<p:outputLabel for="textPass" value="#{msg['Solicitacao.senha']}" />
+					<p:password id="textPass" 
+						feedback="true"
+						size="30"
+						value="#{solicitacaoBean.solicitacao.senha}" />
+
+					<p:outputLabel value="#{msg['Solicitacao.data']}" for="textData" />
+					<p:inputText id="textData" readonly="true" size="30"
+						value="#{solicitacaoBean.solicitacao.dataSolicitacao.time}">
+						<f:convertDateTime pattern="#{msg['Solicitacao.dataFormato']}" />
+					</p:inputText>
+
+					<p:commandButton value="Enviar"
+						actionListener="#{solicitacaoBean.cadastrar}" update="@form"/>
+						
+					<p:commandButton value="Home" immediate="true" 		action="#{solicitacaoBean.navegarHome}" />
+				</h:panelGrid>
+			</h:form>
+
+		</div>
+	</ui:define>
+</ui:composition>
